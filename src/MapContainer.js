@@ -74,9 +74,7 @@ class MapContainer extends Component{
       })
     }
   }
-  findMarker=(name)=>{
-      return document.getElementById(name+'z');
-  }
+ 
   animateMarker=(key)=>{
       console.log(key);
      
