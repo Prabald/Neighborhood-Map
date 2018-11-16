@@ -20,8 +20,9 @@ class MapContainer extends Component{
                     position:'absolute',
                     overflowY:'scroll'
                     },
-                    filteredPlaces:[]
-  };
+        filteredPlaces:[],
+        animatedKey:''
+    };
         changeFilteredPlaces=(newFiltered)=>{
             
             this.setState({filteredPlaces:newFiltered});
@@ -79,7 +80,7 @@ class MapContainer extends Component{
   animateMarker=(key)=>{
       console.log(key);
      
-      console.log(this.findMarker(key));
+      this.setState({animateKey:key})
       
   }
 componentDidMount(){
@@ -96,13 +97,13 @@ componentDidMount(){
      <Map  style ={mapStyle} google={this.props.google} onClick={this.MapClick} initialCenter = {{ lat: 30.3165,lng: 78.0322 }} >
         
     { 
-        this.state.filteredPlaces.map((place,id)=>
+        this.state.filteredPlaces.map((place)=>
         <Marker onClick={this.MarkerClick} 
-             key={id}
-              id={place.referralId+'z'}
+             key={place.referralId}
+              
               position = {{ lat: place.venue.location.lat, lng: place.venue.location.lng }}
               title={place.venue.name} 
-              animation = {2} />
+              animation={(this.state.animateKey===place.referralId)?4:null} />
  )
         
     }
